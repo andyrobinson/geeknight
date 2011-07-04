@@ -1,0 +1,25 @@
+how's this?
+
+an intermediate level look at automated testing aimed at those
+regularly using automated test code.
+
+the talk aims to share understanding of some of the largest, most
+common issues around automated test ownership as the presenter sees
+it.
+
+segments will include: the test automation pyramid, why and when of
+builders and the dangers of static data, using stubs to automate
+testing against external systems, use of page objects for browser
+website testing, what your tests are telling you about your design.
+
+the majority of the talk will be looking at code, mainly in Java.
+there will be some higher-level diagrams and conceptual chat about
+testing cost and value.
+
+brief bio:
+
+Dan trained as an electronic engineer and has been a developer for the
+most part of 20 years, attracted by the travel. he has worked in C,
+VB, SQL, C# and Java to name a few.  he once "engineered" a
+self-modfying build system based on ant and XSLT - he won't be doing
+that again.  Dan has been at Thoughtworks for 4 years.

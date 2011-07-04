@@ -1,0 +1,147 @@
+<html>
+	<head>
+		<title>living with tests</title>
+		<script type="text/javascript" src="jquery-1.4.3.js"></script>
+		<link type="text/css" href="living-with-tests.css" rel="stylesheet"/>
+	</head>
+	<body style="font-family: courier new">
+	        <span class="internal" id="reminder_mins">15</span>
+	        <span class="internal" id="show_opening_message_yes_or_no">no</span>
+		<div class="slide">
+			<h1>living with tests</h1>
+			<p>dan moore, thoughtworks</p>
+		</div>
+		<div class="slide">
+			<h1>this talk<span class="note"></span></h1>
+			<ul class="reveal">
+				<li>concerns software with high test automation coverage<span class="note">when referring to tests generally we mean automated tests</span></li>
+				<li>is aimed at those working on the code</li>
+				<li>interested in total cost of ownership<span class="note">interested but not quantitative - not counting numbers here</span></li>
+				<li>hopes to provide actionable insight into common issues<span class="note">want ppl to be able to use these</span></li>
+				<li>necessarily simplified</li>
+		                <li>aspires to radio 4, more late night radio 5</li>
+		                <li>minimal capitalization</li>
+				<li>no silver bullets!<span class="note">move to presentation framework?</span></li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>talk contents</h1>
+			<ul class="reveal">
+                		<li>test strategy and costs<span class="note">not much code</span></li>
+                		<li>de-mystifying tests with builders</li>
+                		<li>using page objects in browser tests</li>
+                		<li>external integration testing</li>
+                		<li>tests and testability</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>software maintenance with tests</h1>
+			<ul class="reveal">
+                		<li>xUnit Test Patterns - xunitpatterns.com - Gerard Meszaros<span class="note">if this is a sermon meszaros is the bible - written a while ago: method oriented vs OO; sometimes hard to prioritise its commandments; a lot concerned with mitigating dubious choices</span></li>
+				<li>a value model for re-use in test-side code<img src="cost_chart_with_reuse.png"/></li>
+				<li>is it steady state?<span class="note">i.e. are we headed for rewrite</span></li>
+				<li>coverage gives predictability<span class="note">i.e. but what about speed?</span></li>
+				<li>how low?</li>
+				<li>maintenance of test code is significant</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>test automation pyramid</h1>
+			<p>a model for automated tests of a project</p>
+			<img src="test_automation_pyramid.png"/>
+			<ul class="reveal">
+				<li>system tests: slower, fewer, more expensive, high system confidence</li>
+				<li>unit tests: fast, lightweight, many, cheap, localised confidence</li>
+				<li>middle: components, services, everything in-between</li>
+				<li>all: provide feedback on related lower tests</li>
+				<li>above: manual - live or pre-release</li>
+				<li>reduce cost by moving down</li>
+				<li>implies test mobility and readability important</li>
+				<li>strategic, dynamic and project-specific</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>the importance of builders</h1>
+			<ul class="reveal">
+				<li>lack of understandability is expensive</li>
+				<li>signal-to-noise ratio</li>
+				<li>'mystery guest' seems common - assertion non-sequitur</li>
+				<li>often allied to 'standard fixture' - e.g. 'test_cases_1.xml'</li>
+				<li>not DRY but DAMP wanted<span class="note">descriptive and meaningful phrases</span></li>
+				<li>'builders' - simple, effective</li>
+				<li>an example</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>usage of builders</h1>
+			<ul class="reveal">
+				<li>vs. use constructor</li>
+				<li>sensible defaults</li>
+				<li>important to specify relevant info</li>
+				<li>cowboy builder usage</li>
+				<li>- reliance on defaults for relevant information</li>
+				<li>- use to cover up design flaws</li>
+				<li>some languages have support</li>
+				<li>SNR tip: test and variable names for triangulation<span class="note">signal-to-noise ratio; and how about 'so that' and other info?</span></li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>Page Objects pattern</h1>
+			<ul class="reveal">
+				<li>test-support code in end-to-end testing of web apps</li>
+				<li>important vs pyramid</li>
+				<li>pattern is specific case of test-support objects reflecting SUT</li>
+				<li>model types of pages as classes - Page Objects</li>
+				<li>page object interfaces aim for simplicity</li>
+				<li>model shared sections of pages as classes</li>
+				<li>only the 'page' objects know about internals (e.g. html structure)</li>
+				<li>asserts in page objects generally discouraged</li>
+				<li>use separate steps over the pages for: setup, actions and asserts</li>
+				<li>tests use steps</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>external integration testing with stubs</h1>
+			<ul class="reveal">
+				<li>real vs fake?</li>
+				<li>no stubbing: easy, fragile, limited</li>
+				<li>internal stubbing: easy, intrusive, ignorant<span class="note">of issues in stack, of course</span></li>
+				<li>faking endpoints usually pretty easy</li>
+				<li>its our stub, we can show intent</li>
+				<li>example stubbing an http endpoint<img src="external_stubbing.png"/></li>
+				<li>note: stub characterises interesting parts of the external</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>tests and testability</h1>
+			<p>aka what your tests may be telling you about the design</p> 
+			<ul class="reveal">
+				<li>testing pain and code smells<span class="quote">'solving design problems solves test problems' - Michael Feathers</span></li>
+				<li>mainly class isolation testing</li>
+				<li>tdd with mocks as putting SUT in a vice<span class="note">system under test</span></li>
+				<li>inertia against changing, breaking down design</li>
+				<li>big topic. a few simple examples:</li>
+				<li> - lots of dependencies or stubbing - it's doing too much!</li>
+				<li> - i just can't stub it - inject it or a provider!</li>
+				<li> - changing lots of tests - less a pyramid, more of a skyscraper!</li>
+				<li> - furtling around with internal methods - break them out!</li>
+				<li> - stubs returning stubs - playing with other peoples' toys!</li>
+				<li> - prescriptive expectations - mocking where you shouldn't or doing someone else's job!</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>summary</h1>
+			<ul class="reveal">
+				<li>know your test automation edifice</li>
+				<li>builders can aid clarity</li>
+				<li>web testing is easier with page objects</li>
+				<li>stubbing integration points is fun :)</li>
+				<li>testing is easier with testability</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>the end</h1>
+		</div>
+        <script type="text/javascript" src="js-pres.js"></script>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+.note {
+  display: none;
+}
+
+.quote {
+  display: block;
+  margin: 20 0 20 0;
+  font-style: italic;
+}
+
+.internal {
+  display: none;
+}
+
+img {
+  display: block;
+  height: 200px;
+}
+
+body {
+  margin: 20px 0 0 40px;
+}
+
+

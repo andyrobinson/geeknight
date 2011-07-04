@@ -1,0 +1,41 @@
+living with tests
+-----------------
+
+technical debt in tests
+
+'my problem lies in reconciling my gross habits with my net income' - errol flynn
+
+read: refactoring xunit to patterns
+
+ o cool goals, principles, smells
+ o maybe don't worry about a lot of these because they are pretty basic - classify in levels?
+ o goals, economics etc. v good - use economics diagrams
+ o slight disagreement - i'd say: cleanup (a) in startup not teardown for hygiene; (b) in teardown only for resource management
+ o a lot of book about trade-offs and management of sub-optimal conditions
+ o test smells - guesstimate: impact (per instance), frequency (instances per codebase), probability (presence per codebase) - x, y, circle size?
+
+
+ideas:
+
+ o basics - test independence but shared code (diagram a->x, b->x)
+ o whole talk in priority order? outside-in, builders, unit tests vs design testability
+ o failure to effectively refactor tests strongly indicates design flaw
+ o encourage trial and error signal-to-noise
+ o describe given then when and need for under-the-surface code
+ o SUT vs overall behaviour - dependencies vs scenarios
+ o terminological conundrum - clarify and share your definitions
+ o simplicity vs balance of test strategy?
+   - do you know what's actually being tested?
+ o process of change - code retro, examples from diversity of styles, agree most painful, task someone to improve, list / divide class responsibilities
+ o midnight run - why not? ci, feedback, context
+ o test simplicity - snr
+ o snr vs dry - important to expose pertinent details that aid understanding e.g. BEWARE_OVERUSE_OF_THE_GOLDEN_CONSTANT_HAMMER - example?
+ o explicit vs implicit - esp. wrt. unit tests - i want to answer x (80-90%?) of qs looking directly at test
+ o using context to reduce burden - e.g in CooperativeRemoteSharedDatabaseTransactionUnitTest, don't need to constantly refer to 'cooperativeRemoteSharedDatabaseTransaction' - 'transaction' will do
+ o the big number on the glass hand print 'i write the big number against your details and against the cast, so when i come to take them out in the morning it's easy for me to know which is which. _the easier the better_'
+ o round-trip (front door only) testing vs backdoor (e.g. persistence / hibernate)
+ o seek opportunities to use comparative front door testing
+ o on test name vs test duplication: test naming to clarify, triangulate and elucidate meaning
+  - maybe that's why i tend not to like data-driven tests
+ o low-level favourite - Time, Clock
+ o don't hook your builders or superbuilders into heavy dependencies - e.g. db - otherwise it'll always be slow .... (cause creating a lot of defaults not necessarily relevant to scenario)
